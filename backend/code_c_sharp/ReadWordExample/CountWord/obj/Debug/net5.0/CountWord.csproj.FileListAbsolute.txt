@@ -1,0 +1,16 @@
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.exe
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.deps.json
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.runtimeconfig.json
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.runtimeconfig.dev.json
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.dll
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\ref\CountWord.dll
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\bin\Debug\net5.0\CountWord.pdb
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.csprojAssemblyReference.cache
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.AssemblyInfoInputs.cache
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.AssemblyInfo.cs
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.csproj.CoreCompileInputs.cache
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.dll
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\ref\CountWord.dll
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.pdb
+C:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_c_sharp\ReadWordExample\CountWord\obj\Debug\net5.0\CountWord.genruntimeconfig.cache

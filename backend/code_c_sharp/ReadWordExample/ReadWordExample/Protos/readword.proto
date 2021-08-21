@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "ReadWordExample.Protos"; 
+ 
+package readword;
+
+// The greeting service definition.
+service ReadWordProto {
+  rpc ReadWordExample() returns(stream WordCount)
+  // Sends a greeting
+  rpc ReadWordMethod (ConfigWord) returns (stream WordCount);
+}
+
+// The request message containing the user's name.
+message ConfigWord {
+  int32 length_word = 1;
+  int32 quantity_word = 2;
+
+}
+
+// The response message containing the greetings.
+message WordCount {
+  string message = 1;
+}
+

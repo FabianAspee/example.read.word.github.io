@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/readwordakkagrpc/readwordakkagrpc.iml" filepath="$PROJECT_DIR$/readwordakkagrpc/readwordakkagrpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/readwordakkarest/readwordakkarest.iml" filepath="$PROJECT_DIR$/readwordakkarest/readwordakkarest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/readwordcode/readwordcode.iml" filepath="$PROJECT_DIR$/readwordcode/readwordcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/readwordexample.iml" filepath="$PROJECT_DIR$/.idea/readwordexample.iml" />
+    </modules>
+  </component>
+</project>

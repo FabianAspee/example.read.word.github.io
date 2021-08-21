@@ -1,0 +1,4 @@
+rootProject.name = 'readwordexample'
+include 'readwordcode', 'readwordgrpc', 'readwordspring'
+
+
