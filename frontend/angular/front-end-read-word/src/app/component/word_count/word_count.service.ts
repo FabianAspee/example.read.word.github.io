@@ -21,6 +21,9 @@ export class WordCountService{
         data.word_count_info_spring.path.path_spring_rabbitmq).pipe(catchError(this.handleError<string>('initCountWordSpringRabbitMQ', ''))); 
     
     initCountWordNetCoreRabbitMQ=():Observable<string>=> this.http.get<string>(data.word_count_info_net_core.url_word_count + 
-        data.word_count_info_net_core.path.path_spring_rabbitmq).pipe(catchError(this.handleError<string>('initCountWordNetCoreRabbitMQ', ''))); 
+        data.word_count_info_net_core.path.path_netcore_rabbitmq).pipe(catchError(this.handleError<string>('initCountWordNetCoreRabbitMQ', ''))); 
+    
+    initCountWordAkkaRestRabbitMQ=():Observable<string>=> this.http.get<string>(data.word_count_info_akka_rest.url_word_count + 
+        data.word_count_info_akka_rest.path.path_akkarest_rabbitmq).pipe(catchError(this.handleError<string>('initCountWordAkkaRestRabbitMQ', ''))); 
 
 }

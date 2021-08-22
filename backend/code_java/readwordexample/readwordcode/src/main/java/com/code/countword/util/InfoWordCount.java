@@ -34,10 +34,8 @@ public class InfoWordCount {
     }
 
     public void merge(Map<String, Integer> wordCount, File file, int task, int numTask) {
-        check(file).filter(value->value==0).ifPresent(x->{
-            wordCount.forEach((k, v) -> this.wordFrequency.merge(k, v, Integer::sum));//Mirar partidura de archivos
-
-        });
+        check(file).filter(value->value==0).ifPresent(x->
+            wordCount.forEach((k, v) ->  this.wordFrequency.merge(k, v,  Integer::sum)));
         sendWordCount();
     }
     public void sendWordCount(){

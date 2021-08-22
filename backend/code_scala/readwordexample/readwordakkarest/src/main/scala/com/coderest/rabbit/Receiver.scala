@@ -1,5 +1,5 @@
-package main.scala.com.coderest.rabbit
+package com.coderest.rabbit
 
-class Receiver {
+object Receiver {
 
 }

@@ -1,7 +1,22 @@
-package main.scala.com.code.countword.implementation
+package com.code.countword.implementation
 
-import main.scala.com.code.countword.contract.CountWord
+import com.code.countword.contract.CountWord
+import com.code.countword.util.{AbstractExecutionContext, InfoWordCount}
 
-class CountWordImp extends CountWord{
+import java.io.File
+import scala.concurrent.Future
+
+class CountWordImp(task:Int, numTask:Int, infoWordCount: InfoWordCount) extends AbstractExecutionContext with CountWord{
+  override def countWordFork(lines: List[String], file: File):Future[Option[Long]]=Future
+  {
+    val result = lines.flatMap(line=>wordsIn(line).filter(word=>word.length>=infoWordCount.getLengthWord))
+      .filter(word=>word.nonEmpty).groupBy(value=>value).map(value=>value._1->value._2.size)
+    infoWordCount.merge(result,file, task, numTask)
+    Option(1L)
+  }
+
+  private def wordsIn(line: String): Array[String] =
+    line.trim.split("(\\s|\\p{Punct})+")
+
 
 }

@@ -57,7 +57,7 @@ public class ReadFileImp extends RecursiveTask<Long> {
         List<String> lines  = read.lines().collect(Collectors.toList());
         read.close();
         long countLines = lines.size();
-        if(lines.size()!=0) {
+        if(countLines!=0) {
             if(countLines>100 || size > 500000) {
                 return forkFile(countLines, lines);
             }else {

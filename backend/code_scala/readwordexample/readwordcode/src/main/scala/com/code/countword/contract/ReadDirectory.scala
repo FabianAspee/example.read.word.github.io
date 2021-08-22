@@ -1,5 +1,11 @@
-package main.scala.com.code.countword.contract
+package com.code.countword.contract
+
+import java.io.File
+import scala.concurrent.Future
 
 trait ReadDirectory {
 
+  def readDirectory(): Future[Option[Long]]
+
+  def readDirectory(folder: File): Future[Option[Long]]
 }

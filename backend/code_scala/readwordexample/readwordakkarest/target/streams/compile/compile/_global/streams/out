@@ -1,0 +1,4 @@
+[0m[[0m[33mwarn[0m] [0m[0mC:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_scala\readwordexample\readwordakkarest\src\main\scala\com\coderest\routes\exception\SuccessAndFailure.scala:20:59: unreachable code[0m
+[0m[[0m[33mwarn[0m] [0m[0m    case Success(Some(StatusCodes.BadRequest)) => complete(StatusCodes.BadRequest,Response[Int](StatusCodes.BadRequest.intValue))[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                          ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

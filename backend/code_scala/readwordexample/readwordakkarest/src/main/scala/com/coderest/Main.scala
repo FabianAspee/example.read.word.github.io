@@ -1,5 +1,10 @@
-package main.scala.com.coderest
+package com.coderest
 
-object Main extends App {
+import akka.actor.typed.ActorSystem
+import com.coderest.ServerConf.StartServer
 
+object Main{
+  def main(args: Array[String]): Unit = {
+    ActorSystem[StartServer](ServerConf(), "AkkaHttpServer")
+  }
 }

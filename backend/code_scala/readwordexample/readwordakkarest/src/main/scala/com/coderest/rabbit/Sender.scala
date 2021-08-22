@@ -1,5 +1,6 @@
-package main.scala.com.coderest.rabbit
+package com.coderest.rabbit
 
-class Sender {
-
+object Sender {
+  def sendViaDirectExchange(message: String):Unit =
+    ConfigSender.convertAndSend(ConnectionRabbit.DIRECT_EXCHANGE_NAME, "", message)
 }

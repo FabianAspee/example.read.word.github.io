@@ -19,6 +19,7 @@ export class WordCountComponent{
    
   rabbit_call_word_count_example_spring = "Real Time Name Word Count Spring-RabbitMQ";
   rabbit_call_word_count_example_net_core_api = "Real Time Name Word Count NetCore-RabbitMQ";
+  rabbit_call_word_count_example_akka_rest = "Real Time Name Word Count AkkaRest-RabbitMQ";
   word_count_example_grpc = "Real Time Word Count gRPC";
  
   place_holder_result = "Word count result";
@@ -27,6 +28,7 @@ export class WordCountComponent{
   
   countWordSpringRabbitMQ= ()=> this.initCountWordSpringRabbitMQ();
   countWordNetCoreRabbitMQ= ()=> this.initCountWordNetCoreRabbitMQ();
+  countWordAkkaRestRabbitMQ= ()=> this.initCountWordAkkaRestRabbitMQ();
   countWordgRPC= ()=> this.initCountWordgRPC();
  
   
@@ -42,6 +44,10 @@ export class WordCountComponent{
 
   private initCountWordNetCoreRabbitMQ() {
     this.configService.initCountWordNetCoreRabbitMQ()
+    .subscribe(allNameTurbine => console.log(allNameTurbine));
+  }
+  private initCountWordAkkaRestRabbitMQ() {
+    this.configService.initCountWordAkkaRestRabbitMQ()
     .subscribe(allNameTurbine => console.log(allNameTurbine));
   }
   private printValueRabbit=(x:string):string=>{

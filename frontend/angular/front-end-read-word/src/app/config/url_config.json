@@ -9,7 +9,14 @@
     "word_count_info_net_core":{
         "url_word_count":"http://localhost:45549/",
         "path":{
-            "path_spring_rabbitmq":"api/readwordexample",
+            "path_netcore_rabbitmq":"api/readwordexample",
+            "path_grpc":"api/readword"
+        }
+    },
+     "word_count_info_akka_rest":{
+        "url_word_count":"http://localhost:8080/",
+        "path":{
+            "path_akkarest_rabbitmq":"readwordexample",
             "path_grpc":"api/readword"
         }
     },
