@@ -1,4 +1,4 @@
-[0m[[0m[33mwarn[0m] [0m[0mC:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_scala\readwordexample\readwordcode\src\main\scala\com\code\countword\util\InfoWordCount.scala:8:28: The outer reference in this type test cannot be checked at run time.[0m
+[0m[[0m[33mwarn[0m] [0m[0mC:\Users\faspe\Downloads\Prometeia\example.read.word.github.io\backend\code_scala\readwordexample\readwordcode\src\main\scala\com\code\countword\util\InfoWordCount.scala:9:28: The outer reference in this type test cannot be checked at run time.[0m
 [0m[[0m[33mwarn[0m] [0m[0m  private final case class InfoWord(string: String, total: Int){[0m
 [0m[[0m[33mwarn[0m] [0m[0m                           ^[0m
 [0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

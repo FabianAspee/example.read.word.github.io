@@ -56,7 +56,6 @@ public class ReadDirectoryImp extends RecursiveTask<Long>{
         }*/
         return Optional.of(folder).map(File::listFiles).map(files->{
             count++;
-            System.out.println(count);
             Arrays.stream(files).forEach(file->{
                 if(file.isDirectory() && file.canRead()) {
                     readDirectoryRecursive(file);
@@ -68,6 +67,8 @@ public class ReadDirectoryImp extends RecursiveTask<Long>{
             return Optional.of(counter);
         }).orElseGet(()->{
             if(folder.isFile()){
+                
+                System.out.println(folder.isFile());
                 taskAndMethod(task,factory.getReadFile(folder,this.infoWordCount));
                 return Optional.of(counter);
             }
