@@ -24,7 +24,8 @@ class InfoWordCount(lengthWord: Int, qtaWord: Int, print: String=>Unit) extends 
   def sendWordCount():Unit={
     val result = wordFrequency.entrySet().asScala.map(value=>value.getKey->value.getValue)
       .toSeq.sortWith(_._2>_._2)
-    print(result.take(qtaWord).map(value=>InfoWord(value._1,value._2)).mkString("\n"))
+    val r = result.take(qtaWord).map(value=>InfoWord(value._1,value._2)).mkString("\n")
+    print(r)
   }
   def getLengthWord: Int = lengthWord
 }
