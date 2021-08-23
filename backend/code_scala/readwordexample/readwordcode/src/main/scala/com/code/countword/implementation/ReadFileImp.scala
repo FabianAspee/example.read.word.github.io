@@ -45,11 +45,11 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
     @tailrec
     def _callCountWord(toIndexAux:Int, toIndex: Int=0, task: Int=0, fromIndex:Int=0):Future[Option[Long]]= task match {
       case iTask if iTask<numTasks && iTask==(numTasks-2)=>
-        callCountWord(lines,fromIndex,toIndexAux,iTask,numTasks)
-        _callCountWord(toIndex,toIndexAux+toIndex,task+1,toIndex)
+        callCountWord(lines,fromIndex,toIndex,iTask,numTasks)
+        _callCountWord(toIndex,countLines,task+1,toIndex)
       case iTask if iTask<numTasks=>
-        callCountWord(lines,fromIndex,toIndexAux,iTask,numTasks)
-        _callCountWord(toIndex,toIndexAux+toIndex,task+1,toIndex)
+        callCountWord(lines,fromIndex,toIndex,iTask,numTasks)
+        _callCountWord(toIndexAux,toIndexAux+toIndex,task+1,toIndex)
       case _ => Future.successful(Option(1))
     }
     _callCountWord(toIndex ,toIndex)

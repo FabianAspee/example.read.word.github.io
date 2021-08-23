@@ -1,0 +1,12 @@
+com/example/readwordspring/contract/ReadWordContract.java
+ com.example.readwordspring.contract.ReadWordContract
+com/example/readwordspring/ReadWordSpringApplication.java
+ com.example.readwordspring.ReadWordSpringApplication
+com/example/readwordspring/rabbitmq/Sender.java
+ com.example.readwordspring.rabbitmq.Sender
+com/example/readwordspring/rabbitmq/ConnectionRabbit.java
+ com.example.readwordspring.rabbitmq.ConnectionRabbit
+com/example/readwordspring/rabbitmq/Receiver.java
+ com.example.readwordspring.rabbitmq.Receiver
+com/example/readwordspring/controller/ReadWordController.java
+ com.example.readwordspring.controller.ReadWordController
