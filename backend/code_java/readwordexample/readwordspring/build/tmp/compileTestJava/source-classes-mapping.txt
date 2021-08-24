@@ -1,2 +1,0 @@
-com/example/readwordspring/ReadwordspringApplicationTests.java
- com.example.readwordspring.ReadwordspringApplicationTests
