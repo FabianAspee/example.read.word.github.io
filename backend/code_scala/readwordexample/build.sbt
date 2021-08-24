@@ -8,7 +8,8 @@ ThisBuild /Test / parallelExecution := false
 
 lazy val readwordcode = project.settings(
   name := "word-count-code-scala",
-  scalacOptions ++= compilerOptions
+  scalacOptions ++= compilerOptions,
+  assemblySettings
 )
 
 lazy val readwordakkagrpc = project.settings(
@@ -19,7 +20,8 @@ lazy val readwordakkagrpc = project.settings(
     libraries.akkaStream,
     libraries.sprayJson
   ),
-  scalacOptions ++= compilerOptions
+  scalacOptions ++= compilerOptions,
+  assemblySettings
 )
 
 lazy val readwordakkarest = project.settings(
@@ -44,7 +46,8 @@ lazy val readwordakkarest = project.settings(
     libraries.bcryp,
     libraries.javax
   ),
-  scalacOptions ++= compilerOptions
+  scalacOptions ++= compilerOptions,
+  assemblySettings
 ).dependsOn(readwordcode)
 
 lazy val compilerOptions = Seq(
@@ -93,3 +96,17 @@ lazy val libraries = new {
   val megard         = "ch.megard"                %% "akka-http-cors"           % megarVersion
   val bcryp          ="org.mindrot"               %  "jbcrypt"                  % bcrypVersion
 }
+lazy val assemblySettings = Seq(
+  assembly / assemblyJarName := name.value + ".jar",
+  assembly / assemblyMergeStrategy := {
+    case PathList("test", "resources", "application.conf") =>
+      MergeStrategy.discard
+    case "module-info.class" => MergeStrategy.discard
+    case x =>
+      val oldStrategy = (assembly / assemblyMergeStrategy).value
+      oldStrategy(x)
+  },
+  scalacOptions ++= compilerOptions,
+  cleanFiles += baseDirectory.value / "temp",
+  assembly / test := {}
+)
