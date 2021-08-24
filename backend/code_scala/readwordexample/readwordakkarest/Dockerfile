@@ -5,8 +5,8 @@ COPY --chown=sbt:sbt backend/code_scala/readwordexample/readwordcode /home/sbt/s
 COPY --chown=sbt:sbt backend/code_scala/readwordexample/readwordakkarest /home/sbt/src/readwordakkarest
 
 RUN sbt clean
-RUN sbt compile "project readwordcode"
-RUN sbt compile "project readwordakkarest"
+RUN sbt "project readwordcode" compile 
+RUN sbt "project readwordakkarest" compile 
 
 # actual container
 FROM openjdk:16-alpine
