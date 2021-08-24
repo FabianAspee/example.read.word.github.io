@@ -7,6 +7,6 @@ namespace CountWord.CountWord.Contract
 {
     public interface ICountWord
     {
-        void CountWordFork(string[] words);
+        Task CountWordFork(string[] words);
     }
 }

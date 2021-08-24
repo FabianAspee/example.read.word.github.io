@@ -14,6 +14,6 @@ namespace ReadWordAspNET.RabbitMQ
         public static Sender Instance => instance.Value;
 
         public void SendViaDirectExchange(string message) => 
-            configSender.ConvertAndSend(ConnectionRabbit.DIRECT_EXCHANGE_NAME, "", message);
+            Task.Run(()=>configSender.ConvertAndSend(ConnectionRabbit.DIRECT_EXCHANGE_NAME, "", message));
     }
 }

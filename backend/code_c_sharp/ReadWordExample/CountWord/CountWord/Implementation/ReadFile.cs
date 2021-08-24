@@ -1,4 +1,5 @@
 ﻿using CountWord.CountWord.Contract;
+using CountWord.CountWord.Util;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,40 +9,36 @@ using System.Threading.Tasks;
 
 namespace CountWord.CountWord.Implementation
 {
-    public class ReadFile : IReadFile
-    {
-        private readonly ConcurrentQueue<Task> TaskList = new();
+    public class ReadFile :AbstractExecutionContext, IReadFile
+    { 
         private static ICountWord CountWordFork;
         private const int DEFAULT_LINES = 100;
         public ReadFile(ICountWord Count) => CountWordFork = Count;
         public async Task ReadAllFile(string root)
         {
-            string[] lines = System.IO.File.ReadAllLines(root);
+            string[] lines = await System.IO.File.ReadAllLinesAsync(root);
             await SplitFile(lines);
         }
-        private Task SplitFile(string[] lines)
+        private static async Task SplitFile(string[] lines)
         {
             var lenght = lines.Length;
             if (lenght > DEFAULT_LINES)
             {
                 var quotient = Math.DivRem(lenght, DEFAULT_LINES, out int remainder);
-                for (int i = 0; i < quotient; i++)
-                {
-                    SplitFile(lines.Skip(DEFAULT_LINES * i).Take(DEFAULT_LINES).ToArray());
-                }
-
-                SplitFile(lines.Skip(lenght - remainder).Take(lenght - remainder).ToArray());
+                var task = Enumerable.Range(0, quotient + 1)
+                    .Select(index => index < quotient ? lines.Skip(DEFAULT_LINES * index).Take(DEFAULT_LINES).ToArray() : lines.Skip(lenght - remainder).Take(lenght - remainder).ToArray())
+                    .ToList().Select(lines => CallCountWord(lines)).ToList();
+                await Task.WhenAll(task);
+                
             }
             else if (lenght > 0)
             {
-                TaskList.Enqueue(Task.Run(() => CountWordFork.CountWordFork(
-                  lines.SelectMany(x => SplitString(x)).ToArray())));
+                await CallCountWord(lines);
             }
-
-            return Task.Factory.ContinueWhenAll(TaskList.ToArray(), tasks => true); 
-
+            await Task.CompletedTask;
         }
-
+        private static async Task CallCountWord(string[] lines) => await Task.Run(async () => await CountWordFork.CountWordFork(
+                    lines.SelectMany(x => SplitString(x)).ToArray()));
         private static string[] SplitString(string line)
         {
             string regex = @"(\s|\p{P})+";

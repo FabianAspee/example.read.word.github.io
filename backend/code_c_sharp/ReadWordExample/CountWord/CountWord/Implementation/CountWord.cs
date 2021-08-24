@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CountWord.CountWord.Implementation
@@ -15,20 +16,26 @@ namespace CountWord.CountWord.Implementation
         private readonly ConcurrentDictionary<string, int> wordLenght = new();
         public CountWord(int qtaWord, int lenghtWord, Action<string> print) =>
             (this.qtaWord, this.lenghtWord, this.print) = (qtaWord, lenghtWord, print);
-        void ICountWord.CountWordFork(string[] words)
+        async Task ICountWord.CountWordFork(string[] words)
         {
-            words.ToList().FindAll(x => x.Length >= lenghtWord).ForEach(word =>
+            Console.WriteLine(ThreadPool.ThreadCount);
+            await Task.Run(async () =>
             {
-                wordLenght.AddOrUpdate(word, 1, (_, y) => y + 1);
+                words.ToList().FindAll(x => x.Length >= lenghtWord).ForEach(word =>
+                {
+                    wordLenght.AddOrUpdate(word, 1, (_, y) => y + 1);
+                });
+                print(await GetWord());
             });
-            print(GetWord());
+           
         }
-        private string GetWord() {
+        private async Task<string> GetWord() {
              
-            Dictionary<string, int> concurrent = wordLenght.ToDictionary(kvp => kvp.Key,
+            Dictionary<string, int> concurrent = wordLenght.AsParallel().ToDictionary(kvp => kvp.Key,
                                                                          kvp => kvp.Value);
-            return string.Join("\n", concurrent.OrderByDescending(x => x.Value)
-                         .Take(qtaWord).Select(kvp => $"word= {kvp.Key} total={kvp.Value}").ToArray());
+         
+            return string.Join("\n", await Task.Run(() => concurrent.OrderByDescending(x => x.Value)
+                          .Take(qtaWord).Select(kvp => $"word= {kvp.Key} total={kvp.Value}").ToArray()));
         }
          
     }

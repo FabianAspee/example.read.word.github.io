@@ -1,18 +1,19 @@
 ﻿using CountWord.CountWord.Contract;
+using CountWord.CountWord.Util;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CountWord.CountWord.Implementation
 {
-    public class ReadDirectory : IReadDirectory
+    public class ReadDirectory :AbstractExecutionContext, IReadDirectory
     {
         private readonly ConcurrentQueue<Task> TaskList = new();
-        private ReadFile ReadFileFork;
         private readonly ICountWord Count;
         public ReadDirectory(ICountWord Count) => this.Count = Count;
 
@@ -22,30 +23,32 @@ namespace CountWord.CountWord.Implementation
             await ReadAllRecursive(allDirectoryAndFile).ContinueWith(x => Trace.WriteLine(x.ToString(), TaskList.Count.ToString()));
 
         }
-        public Task ReadAllRecursive(List<string> paths)
+        private async Task CallReadFile(string path)=>
+            await Task.Run(async() => await new ReadFile(Count).ReadAllFile(path));
+        
+        private async Task ReadAllRecursive(List<string> paths)
         {
-            paths.ForEach(path =>
+            var result = paths.Select(async (path) =>
             {
                 try
                 {
-                    FileAttributes attr = File.GetAttributes(path);
-                    if (attr.HasFlag(FileAttributes.Directory))
-                        ReadAllRecursive(GetAllFileAndDirectory(path));
-                    else if (path.EndsWith(".txt"))
+                    await (path switch
                     {
-                        ReadFileFork = new ReadFile(Count);
-                        TaskList.Enqueue(Task.Run(async () => await ReadFileFork.ReadAllFile(path)));
-                    }
-                }
-                catch (Exception e)
-                {
-                    e.ToString();
-                }
+                        string route when File.GetAttributes(route).HasFlag(FileAttributes.Directory) =>
+                            ReadAllRecursive(GetAllFileAndDirectory(route).ToList()),
+                        string route when route.EndsWith(".txt") =>
+                            CallReadFile(route),
+                        _ => Task.CompletedTask
 
-            });
-            if (!TaskList.IsEmpty) return Task.WhenAll(TaskList.ToArray());
-            else
-                return Task.CompletedTask;
+                    });
+                }
+                catch
+                {
+                    await Task.CompletedTask;
+                }
+            }).ToList(); 
+            await Task.WhenAll(result);
+            
         }
         private static List<string> GetAllFileAndDirectory(string path)=> Directory.GetFiles(path)
                 .Concat(Directory.GetDirectories(path)).ToList();
