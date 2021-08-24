@@ -1,3 +1,48 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: ${DOCKER_REGISTRY-}rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+        - 15674:15674
+    build:
+      context: .
+      dockerfile: rabbitmq/Dockerfile  
+
+  frontend_angular_read_word:
+    image: ${DOCKER_REGISTRY-}frontend_angular_read_word
+    ports:
+        - 4200:80
+    build:
+      context: .
+      dockerfile: frontend/angular/front-end-read-word/Dockerfile   
+  
+  count_word_java_spring:
+    image: ${DOCKER_REGISTRY-}count_word_java_spring
+    ports:
+        - 8080:8080
+    build:
+      context: .
+      dockerfile: backend/code_java/readwordexample/readwordspring/Dockerfile   
+
+  count_word_csharp_aspnet_core_api:
+    image: ${DOCKER_REGISTRY-}count_word_csharp_aspnet_core_api
+    ports:
+        - 5000:80
+    build:
+      context: .
+      dockerfile: backend/code_c_sharp/ReadWordExample/ReadWordExample/Dockerfile  
+
+  count_word_scala_akka_rest:
+    image: ${DOCKER_REGISTRY-}count_word_scala_akka_rest
+    ports:
+        - 8000:8000
+    build:
+      context: .
+      dockerfile: backend/code_scala/readwordexample/readwordakkarest/Dockerfile  
+
 
 
 

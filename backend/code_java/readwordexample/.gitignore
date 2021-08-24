@@ -502,8 +502,7 @@ jitwatch.out
 
 # Used by the restarr/restarrFull commands as target directories
 /build-restarr/
-/target-restarr/
-
+/target-restarr/ 
 # metals
 .metals
 .bloop

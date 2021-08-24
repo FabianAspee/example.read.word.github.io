@@ -17,3 +17,14 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Class-Path': configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }
+                        .collect { zipTree(it) })
+    }
+
+}
+targetCompatibility = JavaVersion.VERSION_16

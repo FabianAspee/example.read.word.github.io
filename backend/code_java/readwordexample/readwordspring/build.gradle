@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id 'java-library'
 }
 
 group = 'com.example'
@@ -23,3 +23,14 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version,
+                    'Main-Class': 'com.example.readwordspring.main.ReadWordSpringApplication',
+                    'Class-Path': configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }
+                            .collect { zipTree(it) })
+    }
+
+}
+targetCompatibility = JavaVersion.VERSION_16

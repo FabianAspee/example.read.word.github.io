@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["ReadWordExample/ReadWordExample.csproj", "ReadWordExample/"]
+COPY ["backend/code_c_sharp/ReadWordExample/ReadWordExample/ReadWordExample.csproj", "ReadWordExample/"]
 RUN dotnet restore "ReadWordExample/ReadWordExample.csproj"
-COPY . .
+COPY "backend/code_c_sharp/ReadWordExample" .
 WORKDIR "/src/ReadWordExample"
 RUN dotnet build "ReadWordExample.csproj" -c Release -o /app/build
 
