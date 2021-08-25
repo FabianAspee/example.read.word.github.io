@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
+using ReadWordAspNET.RabbitMQ.ContractConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,26 +9,27 @@ using System.Threading.Tasks;
 
 namespace ReadWordAspNET.RabbitMQ
 {
-    public class ConfigSender
+    public class ConfigSender: IConfigSender
     {
-        private static readonly ConnectionRabbit connectionRabbit = ConnectionRabbit.Instance;
-        private static readonly Lazy<ConfigSender> instance = new(() => new ConfigSender());
-
-        private ConfigSender() { }
-        public static ConfigSender Instance => instance.Value;
-        public void ConvertAndSend(string typeSend, string routingKey, string message)
+        private readonly IConnectionRabbit connection = ConnectionRabbit.Instance;
+        private static readonly Lazy<IConfigSender> instance = new(() => new ConfigSender());
+        private ConfigSender() 
         {
-            var connection = connectionRabbit.connection;
-            using var channel = connection.CreateModel();
-            channel.ExchangeDeclare(exchange: typeSend, 
+            
+            connection.GetChannel().ExchangeDeclareNoWait(exchange: ConnectionRabbit.DIRECT_EXCHANGE_NAME,
                                type: "direct",
                                durable: true);
-            channel.BasicPublish(exchange: typeSend,
-                                     routingKey: "direct",
-                                     basicProperties: null,
-                                     body: CreateMessage(message));
-
         }
+        public static IConfigSender Instance => instance.Value;
+        public async void ConvertAndSend(string typeSend, string routingKey, string message) => await Task.Run(() =>
+          {
+              connection.GetChannel().BasicPublish(exchange: typeSend,
+                                       routingKey: "direct",
+                                       basicProperties: null,
+                                       body: CreateMessage(message));
+
+          });
+         
         private static byte[] CreateMessage(string message)=> 
             Encoding.UTF8.GetBytes(message);
          

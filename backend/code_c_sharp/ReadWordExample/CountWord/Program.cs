@@ -17,7 +17,7 @@ namespace CountWord
             Console.WriteLine(111111);
             Thread.Sleep(1000);
             Console.Clear();
-            SubscriberFactory.Instance.GetReadDirectory(Print).ReadDirectoryRecursive();
+            //SubscriberFactory.Instance.GetReadDirectory(Print).ReadDirectoryRecursive();
             Console.ReadLine();
             Console.WriteLine("Hello World!");
         }

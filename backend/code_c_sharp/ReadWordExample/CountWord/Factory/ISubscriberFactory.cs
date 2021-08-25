@@ -8,6 +8,6 @@ namespace CountWord.Factory
 {
     public interface ISubscriberFactory
     { 
-        IReadDirectory GetReadDirectory(Action<string> print);
+        IReadDirectory GetReadDirectory(Func<string, Task> print);
     }
 }

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ReadWordAspNET.RabbitMQ;
+using ReadWordAspNET.RabbitMQ.ContractConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +26,10 @@ namespace ReadWordAspNET
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        public void InitSingleton() => _ = ConfigSender.Instance;
         public void ConfigureServices(IServiceCollection services)
         {
+            InitSingleton();
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,

@@ -12,9 +12,9 @@ namespace CountWord.CountWord.Implementation
     {
         private readonly int qtaWord;
         private readonly int lenghtWord;
-        private readonly Action<string> print;
+        private readonly Func<string, Task> print;
         private readonly ConcurrentDictionary<string, int> wordLenght = new();
-        public CountWord(int qtaWord, int lenghtWord, Action<string> print) =>
+        public CountWord(int qtaWord, int lenghtWord, Func<string,Task> print) =>
             (this.qtaWord, this.lenghtWord, this.print) = (qtaWord, lenghtWord, print);
         async Task ICountWord.CountWordFork(string[] words)
         { 
@@ -24,12 +24,13 @@ namespace CountWord.CountWord.Implementation
                 {
                     wordLenght.AddOrUpdate(word, 1, (_, y) => y + 1);
                 });
-                print(await GetWord());
+                await print(await GetWord());
             });
 
         }
         private async Task<string> GetWord()
         { 
+            Console.WriteLine($"num thread {ThreadPool.ThreadCount}  num word to sorted {wordLenght.Count}");
             return string.Join("\n", (await Task.WhenAll(Task.Run(() => wordLenght.OrderByDescending(x => x.Value)
                             .Take(qtaWord).Select(kvp => $"word= {kvp.Key} total={kvp.Value}").ToArray()))).SelectMany(x => x).ToArray());
 

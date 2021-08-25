@@ -12,7 +12,7 @@ namespace CountWord.Factory
     {
         private static readonly Lazy<ISubscriberFactory> instance = new(() => new SubscriberFactory());
         private SubscriberFactory() { }
-        public IReadDirectory GetReadDirectory(Action<string> print) => new ReadDirectory(new count.Implementation.CountWord(5, 10, print));
+        public IReadDirectory GetReadDirectory(Func<string, Task> print) => new ReadDirectory(new count.Implementation.CountWord(5, 10, print));
 
         public static ISubscriberFactory Instance => instance.Value;
     }
