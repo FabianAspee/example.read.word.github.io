@@ -37,13 +37,13 @@ namespace CountWord.CountWord.Implementation
             ReadAllDirectory(allDirectoryAndFile, stopWatch);
 
         }
-        public void ReadDirectoryRecursive3(string path = "C:\\")
+        public async void ReadDirectoryRecursive3(string path = "C:\\")
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start(); 
             
             List<string> allDirectoryAndFile = GetAllFileAndDirectory(path);
-            ReadAllRecursiveTask(allDirectoryAndFile, stopWatch);
+            await ReadAllRecursiveTask(allDirectoryAndFile, stopWatch);
 
         }
         private async Task CallReadFile(string path)=>
