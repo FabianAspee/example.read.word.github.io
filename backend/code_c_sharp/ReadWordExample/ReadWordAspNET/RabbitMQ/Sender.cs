@@ -1,4 +1,5 @@
-﻿using ReadWordAspNET.RabbitMQ.ContractConfig;
+﻿using CountWord.CountWord.Util;
+using ReadWordAspNET.RabbitMQ.ContractConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReadWordAspNET.RabbitMQ
 {
-    public class Sender
+    public class Sender: AbstractExecutionContext
     {
         private static readonly IConfigSender configSender = ConfigSender.Instance; 
         private static readonly Lazy<Sender> instance = new(() => new Sender());
