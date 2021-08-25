@@ -35,9 +35,9 @@ namespace CountWord.CountWord.Implementation
                     await (path switch
                     {
                         string route when File.GetAttributes(route).HasFlag(FileAttributes.Directory) =>
-                            ReadAllRecursive(GetAllFileAndDirectory(route).ToList()),
+                            Task.WhenAll(ReadAllRecursive(GetAllFileAndDirectory(route).ToList())),
                         string route when route.EndsWith(".txt") =>
-                            CallReadFile(route),
+                            Task.WhenAll(CallReadFile(route)),
                         _ => Task.CompletedTask
 
                     });

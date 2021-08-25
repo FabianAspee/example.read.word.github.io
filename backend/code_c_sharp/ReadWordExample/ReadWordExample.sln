@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadWordExample", "ReadWordExample\ReadWordExample.csproj", "{F62D2DD6-BF04-419E-9BAA-F613EEE1ABB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountWord", "CountWord\CountWord.csproj", "{E9731523-9D4B-4110-8F05-D8D8F1846A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountWord", "CountWord\CountWord.csproj", "{E9731523-9D4B-4110-8F05-D8D8F1846A98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadWordAspNET", "ReadWordAspNET\ReadWordAspNET.csproj", "{D4E10A93-8BEE-468F-915B-732D4D1014A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadWordAspNET", "ReadWordAspNET\ReadWordAspNET.csproj", "{D4E10A93-8BEE-468F-915B-732D4D1014A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountWord2", "CountWord2\CountWord2.csproj", "{5BB94B2A-5BB7-486B-BF94-3B8E2320FAAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D4E10A93-8BEE-468F-915B-732D4D1014A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4E10A93-8BEE-468F-915B-732D4D1014A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E10A93-8BEE-468F-915B-732D4D1014A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB94B2A-5BB7-486B-BF94-3B8E2320FAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB94B2A-5BB7-486B-BF94-3B8E2320FAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB94B2A-5BB7-486B-BF94-3B8E2320FAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB94B2A-5BB7-486B-BF94-3B8E2320FAAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

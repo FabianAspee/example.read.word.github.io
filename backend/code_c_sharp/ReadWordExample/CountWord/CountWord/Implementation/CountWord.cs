@@ -18,7 +18,7 @@ namespace CountWord.CountWord.Implementation
             (this.qtaWord, this.lenghtWord, this.print) = (qtaWord, lenghtWord, print);
         async Task ICountWord.CountWordFork(string[] words)
         {
-            Console.WriteLine(ThreadPool.ThreadCount);
+            //Console.WriteLine(ThreadPool.ThreadCount);
             await Task.Run(async () =>
             {
                 words.ToList().FindAll(x => x.Length >= lenghtWord).ForEach(word =>

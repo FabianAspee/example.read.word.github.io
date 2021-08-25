@@ -33,7 +33,7 @@ namespace CountWord.CountWord.Implementation
             }
             else if (lenght > 0)
             {
-                await CallCountWord(lines);
+                await Task.WhenAll(CallCountWord(lines));
             }
             await Task.CompletedTask;
         }
