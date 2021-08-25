@@ -10,4 +10,5 @@ object ConnectionRabbit {
   val channel: Channel = connection.createChannel
 
   val DIRECT_EXCHANGE_NAME: String = "demo-direct-exchange"
+  val QUEUE_NAME: String = "demo-rabbitmq";
 }

@@ -14,7 +14,7 @@
         }
     },
      "word_count_info_akka_rest":{
-        "url_word_count":"http://localhost:8080/",
+        "url_word_count":"http://localhost:8000/",
         "path":{
             "path_akkarest_rabbitmq":"readwordexample",
             "path_grpc":"api/readword"
