@@ -21,7 +21,7 @@ namespace CountWord.CountWord.Implementation
             //Console.WriteLine(ThreadPool.ThreadCount);
             await Task.Run(async () =>
             {
-                words.ToList().FindAll(x => x.Length >= lenghtWord).ForEach(word =>
+                Parallel.ForEach(words.ToList().FindAll(x => x.Length >= lenghtWord), word =>
                 {
                     wordLenght.AddOrUpdate(word, 1, (_, y) => y + 1);
                 });

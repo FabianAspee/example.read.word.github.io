@@ -17,7 +17,7 @@ namespace CountWord.CountWord.Implementation
         public async Task ReadAllFile(string root)
         {
             string[] lines = await System.IO.File.ReadAllLinesAsync(root);
-            await Task.Run(()=>SplitFile(lines));
+            await Task.Run(async()=>await SplitFile(lines));
         }
         private static async Task SplitFile(string[] lines)
         {
@@ -25,17 +25,19 @@ namespace CountWord.CountWord.Implementation
             if (lenght > DEFAULT_LINES)
             {
                 var quotient = Math.DivRem(lenght, DEFAULT_LINES, out int remainder);
-                var task = Enumerable.Range(0, quotient + 1)
+                await Task.Run(async () =>  await Task.WhenAll(Enumerable.Range(0, quotient + 1)
                     .Select(index => index < quotient ? lines.Skip(DEFAULT_LINES * index).Take(DEFAULT_LINES).ToArray() : lines.Skip(lenght - remainder).Take(lenght - remainder).ToArray())
-                    .ToList().Select(lines => CallCountWord(lines)).ToList();
-                await Task.WhenAll(task);
+                    .ToList().Select(lines => CallCountWord(lines)).ToList()));
                 
             }
             else if (lenght > 0)
             {
                 await Task.WhenAll(CallCountWord(lines));
             }
-            await Task.CompletedTask;
+            else
+            { 
+                await Task.CompletedTask;
+            }
         }
         private static Task CallCountWord(string[] lines) => Task.Run(async () => await CountWordFork.CountWordFork(
                     lines.SelectMany(x => SplitString(x)).ToArray()));
