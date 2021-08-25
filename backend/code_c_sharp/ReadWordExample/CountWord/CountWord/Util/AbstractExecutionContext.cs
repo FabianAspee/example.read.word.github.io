@@ -12,11 +12,10 @@ namespace CountWord.CountWord.Util
         public AbstractExecutionContext()
         {
 
-            ThreadPool.GetMinThreads(out int minThread, out int minCompletionPortThread);
-            ThreadPool.GetMaxThreads(out int maxThread, out int maxCompletionPortThread);
+            ThreadPool.GetMinThreads(out int minThread, out int minCompletionPortThread); 
             ThreadPool.SetMinThreads( minThread,minCompletionPortThread);
-            ThreadPool.SetMaxThreads(maxThread, maxCompletionPortThread);
-            
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount * 2, Environment.ProcessorCount);
+
         }
     }
 }
