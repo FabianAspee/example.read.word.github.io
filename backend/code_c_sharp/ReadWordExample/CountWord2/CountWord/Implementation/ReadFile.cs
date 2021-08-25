@@ -25,9 +25,9 @@ namespace CountWord.CountWord.Implementation
             if (lenght > DEFAULT_LINES)
             {
                 var quotient = Math.DivRem(lenght, DEFAULT_LINES, out int remainder);
-                await Task.Run(async () =>  await Task.WhenAll(Enumerable.Range(0, quotient + 1)
+                await Task.WhenAll(Enumerable.Range(0, quotient + 1)
                     .Select(index => index < quotient ? lines.Skip(DEFAULT_LINES * index).Take(DEFAULT_LINES).ToArray() : lines.Skip(lenght - remainder).Take(lenght - remainder).ToArray())
-                    .ToList().Select(lines => CallCountWord(lines)).ToList()));
+                    .ToList().Select(lines => Task.WhenAll(CallCountWord(lines))).ToList());
                 
             }
             else if (lenght > 0)

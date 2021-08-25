@@ -15,7 +15,7 @@ namespace CountWord.CountWord.Util
             ThreadPool.GetMinThreads(out int minThread, out int minCompletionPortThread);
             ThreadPool.GetMaxThreads(out int maxThread, out int maxCompletionPortThread);
             ThreadPool.SetMinThreads(minThread,minCompletionPortThread);
-            ThreadPool.SetMaxThreads(maxThread, maxCompletionPortThread);
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount, Environment.ProcessorCount);
             
         }
     }
