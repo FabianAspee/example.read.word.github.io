@@ -8,7 +8,7 @@ ThisBuild /Test / parallelExecution := false
 
 lazy val readwordcode = project.settings(
   name := "word-count-code-scala",
-  mainClass := Some("Main"),
+  mainClass := Some("com.code.Main"),
   scalacOptions ++= compilerOptions,
   assemblySettings
 )
@@ -28,7 +28,7 @@ lazy val readwordakkagrpc = project.settings(
 lazy val readwordakkarest = project.settings(
   Compile / mainClass := Some("com.coderest.Main"),
   name := "akka-rest-server-scala",
-  mainClass := Some("Main"),
+  mainClass := Some("com.coderest.Main"),
   libraryDependencies ++= Seq(
     libraries.rabbit,
     libraries.akkaHttp,

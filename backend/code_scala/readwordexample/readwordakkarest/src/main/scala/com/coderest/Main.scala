@@ -7,7 +7,6 @@ import com.coderest.rabbit.Sender
 
 object Main{
   def main(args: Array[String]): Unit = {
-    //SubscriberFactory.getReadDirectory(Sender.sendViaDirectExchange).readDirectory()
-    ActorSystem[StartServer](ServerConf(), "AkkaHttpServer")
+      ActorSystem[StartServer](ServerConf(), "AkkaHttpServer")
   }
 }
