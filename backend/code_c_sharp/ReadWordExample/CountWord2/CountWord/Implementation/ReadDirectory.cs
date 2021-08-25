@@ -52,18 +52,17 @@ namespace CountWord.CountWord.Implementation
         private void ReadAllRecursive(List<string> paths, Stopwatch stopWatch)
         {
            
-            Parallel.ForEach(paths, files =>
+            Parallel.ForEach(paths, async files =>
               {
                   count++;
                   try
                   {
                       VerifiedTime(count, stopWatch, FilesSystemTXT);
                       if (File.GetAttributes(files).HasFlag(FileAttributes.Directory) )   
-                          ReadAllRecursive(GetAllFileAndDirectory(files).ToList(),stopWatch);
+                          await Task.Run(()=>ReadAllRecursive(GetAllFileAndDirectory(files).ToList(),stopWatch));
                       else if (files.EndsWith(".txt")) 
                       {
-                          FilesSystemTXT.Add(files);
-                          Console.WriteLine($"num thread {ThreadPool.ThreadCount} coun files {FilesSystemTXT.Count} directory run {count}");
+                          await c(files,count); 
                       }
                   }
                   catch
