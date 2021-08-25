@@ -9,8 +9,8 @@ namespace CountWord2
     {
         static void Print(string totalWord)
         {
-            Console.Clear();
-            Console.WriteLine(totalWord);
+            //Console.Clear();
+            //Console.WriteLine(totalWord);
         }
 
         public static void Main(string[] arg)

@@ -72,9 +72,10 @@ namespace CountWord.CountWord.Implementation
               });
             
         }
-        private Task c(string route, int count){
+        private async Task c(string route, int count){
             Console.WriteLine($"num thread {ThreadPool.ThreadCount} coun files {FilesSystemTXT.Count} directory run {count}");
-                            return Task.Run(()=>FilesSystemTXT.Add(route));
+            await CallReadFile(route);
+            await Task.Run(()=>FilesSystemTXT.Add(route));
         }
         private async Task ReadAllRecursiveTask(List<string> paths, Stopwatch stopWatch)
         { 
