@@ -17,7 +17,7 @@ namespace CountWord.CountWord.Implementation
         public async Task ReadAllFile(string root)
         {
             string[] lines = await System.IO.File.ReadAllLinesAsync(root);
-            await Task.Run(()=>SplitFile(lines));
+            await Task.Run(async ()=>await SplitFile(lines));
         }
         private static async Task SplitFile(string[] lines)
         {
