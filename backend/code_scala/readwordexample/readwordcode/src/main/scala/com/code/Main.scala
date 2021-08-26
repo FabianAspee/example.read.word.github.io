@@ -1,6 +1,6 @@
 package com.code
 
-import com.code.factory.SubscriberFactory
+import com.readwordcode2.factory.SubscriberFactory
 
 object Main extends App{
   def print(string: String):Unit={
