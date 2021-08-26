@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="JsonConfig\" />
+    <Folder Include="Util\" />
   </ItemGroup>
 
 </Project>

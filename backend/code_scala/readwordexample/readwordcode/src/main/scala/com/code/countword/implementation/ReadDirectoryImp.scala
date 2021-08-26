@@ -14,6 +14,7 @@ class ReadDirectoryImp(infoWordCount: InfoWordCount) extends AbstractExecutionCo
   override def readDirectory(): Future[Option[Long]] = readDirectory(new File("C:\\"))
 
   override def readDirectory(folder:File): Future[Option[Long]] = {
+
     @tailrec
     def _readDirectory(files: List[File], listFuture:List[Future[Option[Long]]]=List.empty, count: Int=1):Future[List[Future[Option[Long]]]]= files match {
       case head::tail if head.getAbsolutePath.endsWith(".txt")=>
@@ -36,7 +37,7 @@ class ReadDirectoryImp(infoWordCount: InfoWordCount) extends AbstractExecutionCo
         Future.successful(listFuture:+future)
       case head::tail if !head.getAbsolutePath.endsWith(".txt")=>
         //println(s"case 6 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        _readDirectory(tail, listFuture, count+1)
+         _readDirectory(tail, listFuture, count+1)
       case _=>
         println(s"case final count: $count num-thread: ${java.lang.Thread.activeCount()}")
         Future.successful(listFuture)

@@ -26,17 +26,20 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
 
   private def readAllFile():Future[Option[Long]]={
     val sizeFile = file.length
-    val read = getContentFile
-    val lines  = read.lines.toList
-    read.close()
-    val countLines = lines.size
-    countLines match {
-      case qtaLines if qtaLines>0 && (countLines>100 || sizeFile > 500000)=>
-        forkFile(countLines,lines.asScala toList)
-      case qtaLines if qtaLines>0 =>factory.getCountWord(DEFAULT_TASK,TASK, infoWordCount)
-        .countWordFork(lines.asScala toList,file)
-      case _ =>Future.successful(Option(0))
-    }
+    Future{getContentFile}.map(read=>{
+      val newRes = read.lines.toList
+      read.close()
+      newRes
+    }).flatMap(lines=>{
+      val countLines = lines.size
+      countLines match {
+        case qtaLines if qtaLines>0 && (countLines>100 || sizeFile > 500000)=>
+          forkFile(countLines,lines.asScala toList)
+        case qtaLines if qtaLines>0 =>factory.getCountWord(DEFAULT_TASK,TASK, infoWordCount)
+          .countWordFork(lines.asScala toList,file)
+        case _ =>Future.successful(Option(0))
+      }
+    })
   }
 
   private def forkFile(countLines: Int, lines: List[String]):Future[Option[Long]]={
@@ -55,6 +58,9 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
     _callCountWord(toIndex ,toIndex)
   }
 
-  private def callCountWord(lines: List[String], fromIndex:Int, toIndex:Int, iTask:Int, numTasks:Int): Future[Option[Long]] =
-    factory.getCountWord(iTask,numTasks, infoWordCount).countWordFork(lines.slice(fromIndex, toIndex),file)
+  private def callCountWord(lines: List[String], fromIndex:Int, toIndex:Int, iTask:Int, numTasks:Int): Future[Option[Long]] = {
+    Future{
+      factory.getCountWord(iTask,numTasks, infoWordCount).countWordFork(lines.slice(fromIndex, toIndex),file)
+    }.flatten
+  }
 }
