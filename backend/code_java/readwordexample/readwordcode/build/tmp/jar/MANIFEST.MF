@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: readwordcode
-Implementation-Version: 0.0.1-SNAPSHOT
-Class-Path: []
-

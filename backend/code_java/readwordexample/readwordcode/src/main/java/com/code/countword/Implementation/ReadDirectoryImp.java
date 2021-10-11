@@ -54,7 +54,6 @@ public class ReadDirectoryImp extends RecursiveTask<Long>{
             return counter;
         }*/
         return Optional.of(folder).map(File::listFiles).map(files->{
-             System.out.println(java.lang.Thread.activeCount());
 
             Arrays.stream(files).forEach(file->{
                 if(file.isDirectory() && file.canRead()) {
@@ -83,6 +82,6 @@ public class ReadDirectoryImp extends RecursiveTask<Long>{
     }
     @Override
     protected Long compute() {
-        return readDirectoryRecursive(new File("C:\\"));
+        return readDirectoryRecursive(new File("/"));
     }
 }

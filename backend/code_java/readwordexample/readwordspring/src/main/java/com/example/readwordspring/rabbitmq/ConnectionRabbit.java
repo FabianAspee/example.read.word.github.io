@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class ConnectionRabbit {
+public class ConnectionRabbit{
     public static final String queueName = "demo-rabbitmq";
     public static final String topicExchangeName = "topic-exchange";
     public static final String headerExchangeName = "demo-headers-exchange";
@@ -20,15 +20,16 @@ public class ConnectionRabbit {
      * @return Queue object
      */
     @Bean
-    Queue queue() {
+    public Queue queue() {
         return new Queue(queueName, true);
     }
+
 
     /**
      * Creates a topic exchange
      */
     @Bean
-    TopicExchange exchange() {
+    public TopicExchange exchange() {
         return new TopicExchange(topicExchangeName);
     }
 
@@ -37,27 +38,30 @@ public class ConnectionRabbit {
      *
      */
     @Bean
-    HeadersExchange headers() {
+    public HeadersExchange headers() {
         return new HeadersExchange(headerExchangeName);
     }
+
 
     /**
      * Creates a direct Exchange
      *
      */
     @Bean
-    DirectExchange directExchange() {
+    public DirectExchange directExchange() {
         return new DirectExchange(directExchangeName);
     }
+
 
     /**
      * Creates a fanout Exchange
      *
      */
     @Bean
-    FanoutExchange fanoutExchange() {
+    public FanoutExchange fanoutExchange() {
         return new FanoutExchange(fanoutExchangeName);
     }
+
 
     /**
      * Bind topic exchange to a queue
@@ -67,10 +71,11 @@ public class ConnectionRabbit {
      * @return
      */
     @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
+    public Binding binding(Queue queue, TopicExchange exchange) {
         // bind a queue to a Topic Exchange with routing key
         return BindingBuilder.bind(queue).to(exchange).with("demo.#");
     }
+
 
     /**
      * Bind header exchnage to a queue
@@ -80,7 +85,7 @@ public class ConnectionRabbit {
      * @return
      */
     @Bean
-    Binding bindingHeader(Queue queue, HeadersExchange exchange) {
+    public Binding bindingHeader(Queue queue, HeadersExchange exchange) {
         // bind a queue to a Header Exchange with argument testId is exist
         return BindingBuilder.bind(queue).to(exchange).where("testId").exists();
     }
@@ -93,9 +98,10 @@ public class ConnectionRabbit {
      * @return
      */
     @Bean
-    Binding directExchnageBinding(Queue queue, DirectExchange directExchange) {
+    public Binding directExchnageBinding(Queue queue, DirectExchange directExchange) {
         return BindingBuilder.bind(queue).to(directExchange).with("direct");
     }
+
 
     /**
      * Bind topic fanout echange to a queue
@@ -105,7 +111,7 @@ public class ConnectionRabbit {
      * @return
      */
     @Bean
-    Binding bindingFanout(Queue queue, FanoutExchange fanoutExchange) {
+    public Binding bindingFanout(Queue queue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(queue).to(fanoutExchange);
     }
 

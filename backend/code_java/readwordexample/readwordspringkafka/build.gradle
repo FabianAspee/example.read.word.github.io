@@ -14,24 +14,23 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation project(':readwordcode')
+    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.7.7'
     implementation project(':readwordspringactivemq')
-    implementation project(':readwordspringkafka')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-amqp:2.5.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
     useJUnitPlatform()
 }
+
 tasks.named('jar') {
     manifest {
         attributes('Implementation-Title': project.name,
-                   'Implementation-Version': project.version,
-                    'Main-Class': 'com.example.readwordspring.main.ReadWordSpringApplication',
-                    'Class-Path': configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }
-                            .collect { zipTree(it) })
+                'Implementation-Version': project.version,
+                'Main-Class': 'com.kafkaexample.ReadWordSpringKafkaApplication',
+                'Class-Path': configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }
+                        .collect { zipTree(it) })
     }
 
 }

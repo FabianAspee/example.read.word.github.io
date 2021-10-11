@@ -507,3 +507,6 @@ jitwatch.out
 .metals
 .bloop
 project/**/metals.sbt
+*.lock
+*.bin
+*.MF

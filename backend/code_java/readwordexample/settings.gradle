@@ -1,4 +1,4 @@
 rootProject.name = 'readwordexample'
-include 'readwordcode', 'readwordgrpc', 'readwordspring'
+include 'readwordcode', 'readwordspring', 'readwordspringactivemq', 'readwordspringkafka'
 
 
