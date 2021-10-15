@@ -19,7 +19,7 @@ public class ActorSensorParent extends MessageActorSensorParent{
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> createChildSensor(ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> createChildActor(ActorContext<T> context, int n) {
         IntStream.range(0,n).forEach(index->{
             var result = context.spawn(ActorSensorImpl.getInstance(),
                     ApplicationProperties.getInstance().getSensorName()+index);
@@ -29,7 +29,7 @@ public class ActorSensorParent extends MessageActorSensorParent{
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> removeChildSensor(ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> removeChildActor(ActorContext<T> context, int n) {
         throw new NotImplementedError();
     }
 }

@@ -17,14 +17,14 @@ public final class ActorSensorMain extends MessageActorSensorMain{
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> createChildSensor(final ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> createChildActor(final ActorContext<T> context, int n) {
         var ref = context.spawn(ActorSensorParent.getInstance(n), ApplicationProperties.getInstance().getSensorName());
         ref.tell(new MessageActorSensorParent.CreateSensor());
         return Behaviors.empty();
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> removeChildSensor(final ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> removeChildActor(final ActorContext<T> context, int n) {
         //TODO
         throw new NotImplementedError();
     }

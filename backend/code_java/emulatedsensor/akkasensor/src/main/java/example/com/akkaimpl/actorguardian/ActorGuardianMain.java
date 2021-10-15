@@ -15,12 +15,12 @@ public final class ActorGuardianMain extends MessageActorGuardianMain {
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> createChildSensor(ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> createChildActor(ActorContext<T> context, int n) {
         return null;
     }
 
     @Override
-    public <T extends LifeCycleActor> Behavior<T> removeChildSensor(ActorContext<T> context, int n) {
+    public <T extends LifeCycleActor> Behavior<T> removeChildActor(ActorContext<T> context, int n) {
         return null;
     }
 }

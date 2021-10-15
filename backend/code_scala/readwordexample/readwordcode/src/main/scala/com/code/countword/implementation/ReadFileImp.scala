@@ -24,25 +24,27 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
   @throws[FileNotFoundException]
   private def getContentFile = new BufferedReader(new FileReader(file))
 
+
   private def readAllFile():Future[Option[Long]]={
     val sizeFile = file.length
-    Future{getContentFile}.map(read=>{
-      val newRes = read.lines.toList
-      read.close()
-      newRes
-    }).flatMap(lines=>{
-      val countLines = lines.size
-      countLines match {
-        case qtaLines if qtaLines>0 && (countLines>100 || sizeFile > 500000)=>
-          forkFile(countLines,lines.asScala toList)
-        case qtaLines if qtaLines>0 =>factory.getCountWord(DEFAULT_TASK,TASK, infoWordCount)
-          .countWordFork(lines.asScala toList,file)
-        case _ =>Future.successful(Option(0))
-      }
-    })
+    Future{getContentFile}.map(
+      read =>{
+        val newRes = read.lines.toList
+        read.close()
+        newRes
+    }).collect({
+      case lines =>
+        val countLines = lines.size
+        countLines match {
+          case qtaLines if qtaLines>0 && (countLines>100 || sizeFile > 500000)=>
+            forkFile(countLines,lines.asScala toList)
+          case qtaLines if qtaLines>0 =>factory.getCountWord(DEFAULT_TASK,TASK, infoWordCount)
+            .countWordFork(lines.asScala toList,file)
+          case _ =>Future.successful(Option(0L))
+        }
+    }).flatten
   }
-
-  private def forkFile(countLines: Int, lines: List[String]):Future[Option[Long]]={
+  private def forkFile(countLines: Int, lines: List[String]):Future[Option[Long]]=Future{
     val numTasks:Int = Math.ceil(countLines/NUMBER_LINES) toInt
     val toIndex = countLines/numTasks
     @tailrec
@@ -56,7 +58,7 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
       case _ => Future.successful(Option(1))
     }
     _callCountWord(toIndex ,toIndex)
-  }
+  }.flatten
 
   private def callCountWord(lines: List[String], fromIndex:Int, toIndex:Int, iTask:Int, numTasks:Int): Future[Option[Long]] = {
     Future{

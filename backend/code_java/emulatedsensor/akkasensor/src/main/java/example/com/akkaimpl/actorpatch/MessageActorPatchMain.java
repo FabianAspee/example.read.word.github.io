@@ -12,8 +12,8 @@ public abstract class MessageActorPatchMain implements LifeCycle{
     public static record RemoveSensor() implements CommandPatchMain {}
     protected Behavior<CommandPatchMain> createMsg(final ActorContext<CommandPatchMain> context, final int n) {
         return Behaviors.receive(CommandPatchMain.class)
-                .onMessage(CreateSensor.class, child -> createChildSensor(context, n))
-                .onMessage(RemoveSensor.class, child -> removeChildSensor(context, n))
+                .onMessage(CreateSensor.class, child -> createChildActor(context, n))
+                .onMessage(RemoveSensor.class, child -> createChildActor(context, n))
                 .build();
     }
 

@@ -4,13 +4,11 @@ import com.readwordcode2.countword.contract.ReadFile
 import com.readwordcode2.countword.util.{AbstractExecutionContext, InfoWordCount}
 import com.readwordcode2.factory.SubscriberFactory
 
-import java.io.{BufferedReader, FileNotFoundException, FileReader}
-import java.io.File
+import java.io.{BufferedReader, File, FileNotFoundException, FileReader}
 import scala.annotation.tailrec
 import scala.concurrent.Future
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.language.postfixOps
-import scala.util.{Failure, Success}
 
 class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExecutionContext with ReadFile{
   private val factory = SubscriberFactory
@@ -33,7 +31,7 @@ class ReadFileImp(file: File, infoWordCount: InfoWordCount) extends AbstractExec
         read.close()
         newRes
     }).collect({
-      case lines =>
+      case lines if lines.size()>0=>
         val countLines = lines.size
         countLines match {
           case qtaLines if qtaLines>0 && (countLines>100 || sizeFile > 500000)=>

@@ -14,35 +14,31 @@ class ReadDirectoryImp(infoWordCount: InfoWordCount) extends AbstractExecutionCo
   override def readDirectory(): Future[Option[Long]] = readDirectory(new File("C:\\"))
 
   override def readDirectory(folder:File): Future[Option[Long]] = {
+    var count = 0;
+    var count_file = 0;
+    def ReadAllRecursiveTask(paths: List[File]):Future[Option[Long]]= {
+      val result = paths.map(path => {
+        count = count + 1
+        try {
+          path match {
+            case route if route.isDirectory =>
+              Future {
+                ReadAllRecursiveTask(route.listFiles() toList)
+              }.flatten
+            case route if route.getAbsolutePath.endsWith(".txt") =>
+              println(s"num thread ${java.lang.Thread.activeCount()} coun files $count_file directory run $count")
+              count_file = count_file + 1
+              factory.getReadFile(route,infoWordCount).readFile()
+            case _ => Future.successful(Option(1L))
 
-    @tailrec
-    def _readDirectory(files: List[File], listFuture:List[Future[Option[Long]]]=List.empty, count: Int=1):Future[List[Future[Option[Long]]]]= files match {
-      case head::tail if head.getAbsolutePath.endsWith(".txt")=>
-        println(s"case 1 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        val future = factory.getReadFile(head, infoWordCount).readFile()
-        _readDirectory(tail, listFuture:+future, count+1)
-      case head::tail if head.isDirectory && Option(head.listFiles).nonEmpty=>
-        //println(s"case 2 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        val e = tail ::: head.listFiles.toList
-        _readDirectory(tail ::: head.listFiles.toList, listFuture, count+1)
-      case head::tail if head.isDirectory && Option(head.listFiles).isEmpty=>
-        //println(s"case 3  count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        _readDirectory(tail, listFuture, count+1)
-      case head::_ if head.isDirectory && Option(head.listFiles).nonEmpty=>
-        //println(s"case 4 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        _readDirectory(head.listFiles toList, listFuture, count+1)
-      case head::_ if head.getAbsolutePath.endsWith(".txt")=>
-        //println(s"case 5 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-        val future = factory.getReadFile(head,infoWordCount).readFile()
-        Future.successful(listFuture:+future)
-      case head::tail if !head.getAbsolutePath.endsWith(".txt")=>
-        //println(s"case 6 count: $count name file ${head.getName} num-thread: ${java.lang.Thread.activeCount()}")
-         _readDirectory(tail, listFuture, count+1)
-      case _=>
-        println(s"case final count: $count num-thread: ${java.lang.Thread.activeCount()}")
-        Future.successful(listFuture)
+          }
+        }
+        catch {
+          case _: Throwable => Future.successful(Option(1L));
+        }
+      })
+      Future.sequence(result).map(values=>values.flatten.reduceOption(_+_))
     }
-   _readDirectory(folder.listFiles toList).map(x=>Future.sequence(x)).flatten
-      .flatMap(value=> Future.successful(Option(value.flatten.sum)))
+    ReadAllRecursiveTask(folder.listFiles() toList)
   }
 }

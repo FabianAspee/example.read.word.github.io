@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace CountWord.CountWord.Implementation
 {
+      
     public class ReadFile : AbstractExecutionContext, IReadFile
     {
         private static ICountWord CountWordFork;
         private const int DEFAULT_LINES = 100;
         public ReadFile(ICountWord Count) => CountWordFork = Count;
         public async Task ReadAllFile(string root)
-        {
+        { 
+        
             string[] lines = await System.IO.File.ReadAllLinesAsync(root);
             await Task.Run(async () => await SplitFile(lines));
         }

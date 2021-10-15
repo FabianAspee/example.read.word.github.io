@@ -28,7 +28,7 @@ class ReadDirectoryImp(infoWordCount: InfoWordCount) extends AbstractExecutionCo
            case route if route.getAbsolutePath.endsWith(".txt") =>
              println(s"num thread ${java.lang.Thread.activeCount()} coun files $count_file directory run $count")
              count_file = count_file + 1
-             Future.successful(Option(1L))
+             Future {SubscriberFactory.getReadFile(route,infoWordCount).readFile()}.flatten
            case _ => Future.successful(Option(1L))
 
          }

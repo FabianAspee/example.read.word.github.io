@@ -17,14 +17,14 @@ public class ClusterMain {
     private static final int NUMBER_SENSOR = 5;
     public static void main(String[] args){
 
-        Optional.of(new String[]{"1"})
+        Optional.of(new String[]{"sensor","guardian","patch"})
                 .ifPresent(argument-> Arrays.stream(argument)
                         .forEach(arg->{
                             switch (arg) {
                                 case "sensor" -> createSensor(ApplicationProperties.getInstance().getClusterConfigPath());
                                 case "guardian" -> createGuardian(ApplicationProperties.getInstance().getClusterConfigPath());
                                 case "patch" -> createPatch(ApplicationProperties.getInstance().getClusterConfigPath());
-                                default ->createSensor(ApplicationProperties.getInstance().getClusterConfigPath());
+                                default ->System.out.println("actor not exist");
                             }
                         }));
     }

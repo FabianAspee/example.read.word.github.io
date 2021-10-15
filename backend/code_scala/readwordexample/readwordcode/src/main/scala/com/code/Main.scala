@@ -1,10 +1,10 @@
 package com.code
 
-import com.readwordcode2.factory.SubscriberFactory
+import com.code.factory.SubscriberFactory
 
 object Main extends App{
   def print(string: String):Unit={
-
+    println(string)
   }
   SubscriberFactory.getReadDirectory(print).readDirectory()
 }
