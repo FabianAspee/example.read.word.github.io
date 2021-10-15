@@ -18,22 +18,22 @@ public record ReadWordController(SenderRabbitMQ senderService, SenderActive send
     @Override
     public void readWordExample() {
         var fork = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        ReadDirectoryImp readDirectoryImp = SubscriberFactoryImp.getInstance().getReadDirectory(senderService.sendViaDirectExchange);
+        fork.invoke(readDirectoryImp);
+    }
+
+    @Override
+    public void readWordExampleActiveMq() {
+        var fork = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        ReadDirectoryImp readDirectoryImp = SubscriberFactoryImp.getInstance().getReadDirectory(senderActive.sendViaDirectExchange);
+        fork.invoke(readDirectoryImp);
+
+    }
+
+    @Override
+    public void readWordExampleKafka() {
+        var fork = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         ReadDirectoryImp readDirectoryImp = SubscriberFactoryImp.getInstance().getReadDirectory(senderKafka.sendViaDirectExchange);
-        fork.invoke(readDirectoryImp);
-    }
-
-    @Override
-    public void readWordExampleActiveMq(Byte[] bytesFiles) {
-        var fork = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-        ReadDirectoryImp readDirectoryImp = SubscriberFactoryImp.getInstance().getReadDirectory(senderActive.sendViaDirectExchange);
-        fork.invoke(readDirectoryImp);
-
-    }
-
-    @Override
-    public void readWordExampleKafka(Byte[] bytesFiles) {
-        var fork = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-        ReadDirectoryImp readDirectoryImp = SubscriberFactoryImp.getInstance().getReadDirectory(senderActive.sendViaDirectExchange);
         fork.invoke(readDirectoryImp);
     }
 

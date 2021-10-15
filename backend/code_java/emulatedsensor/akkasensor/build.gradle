@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'GeneralMain'
+sourceCompatibility = 16
+targetCompatibility = 16
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+def versions = [
+        ScalaBinary: "2.13"
+]
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation platform("com.typesafe.akka:akka-bom_${versions.ScalaBinary}:2.6.17")
+    implementation "com.typesafe.akka:akka-actor-typed_${versions.ScalaBinary}"
+    implementation "com.typesafe.akka:akka-cluster-typed_${versions.ScalaBinary}"
+
+    implementation 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.13.2'
+}
+
+test {
+    useJUnitPlatform()
+}

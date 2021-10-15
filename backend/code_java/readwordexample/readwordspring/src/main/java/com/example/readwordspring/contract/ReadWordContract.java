@@ -8,10 +8,10 @@ public interface ReadWordContract {
     void readWordExample();
 
     @GetMapping(path = "api/readwordexampleactivemq")
-    void readWordExampleActiveMq(@RequestParam(name = "info_file", defaultValue = "") Byte[] bytesFiles);
+    void readWordExampleActiveMq();
 
     @GetMapping(path = "api/readwordexamplekafka")
-    void readWordExampleKafka(@RequestParam(name = "info_file", defaultValue = "") Byte[] bytesFiles);
+    void readWordExampleKafka();
 
     @GetMapping(path = "api/readword")
     void readWord(@RequestParam(name = "info_file", defaultValue = "") Byte[] bytesFiles);
