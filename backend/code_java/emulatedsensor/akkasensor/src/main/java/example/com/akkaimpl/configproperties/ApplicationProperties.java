@@ -52,22 +52,11 @@ public class ApplicationProperties{
         return senderName;
     }
 
-    ReadFile<InputStream,String> readFile = this::readFromInputStream;
 
     public Config getClusterConfigPath() {
         return Utility.getInstance().getConfig(clusterConfigPath);
     }
 
-    private String readFromInputStream(InputStream inputStream) throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
-            }
-        }
-        return resultStringBuilder.toString();
-    }
     public Config getActorSensorConfigPath() {
         return Utility.getInstance().getConfig(actorSensorConfigPath);
     }

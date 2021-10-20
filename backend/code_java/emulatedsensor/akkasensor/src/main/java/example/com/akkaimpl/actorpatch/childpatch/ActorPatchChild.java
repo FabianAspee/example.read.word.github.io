@@ -16,7 +16,8 @@ public class ActorPatchChild extends MessageActorPatchChild {
 
     @Override
     protected Behavior<CommandPatch> startPatch(ActorContext<CommandPatch> context) {
-        return null;
+        info("Init patch"+context.getSelf().path().name());
+        return Behaviors.same();
     }
 
     @Override

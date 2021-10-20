@@ -4,16 +4,19 @@ import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import example.com.akkaimpl.commonimpl.LifeCycle;
+import example.com.akkaimpl.commonimpl.LoggerImpl;
 
-public abstract class MessageActorSensorMain implements LifeCycle {
-    protected MessageActorSensorMain(){}
+public abstract class MessageActorSensorMain extends LoggerImpl<ActorSensorMain> implements LifeCycle {
+    protected MessageActorSensorMain(){
+        super(ActorSensorMain.class);
+    }
     protected interface CommandSensorMain extends LifeCycleActor {}
-    public static record CreateSensor() implements CommandSensorMain {}
+    public static record CreateSensor(int numberSensor) implements CommandSensorMain {}
     public static record RemoveSensor() implements CommandSensorMain {}
-    protected Behavior<CommandSensorMain> createMsg(final ActorContext<CommandSensorMain> context, final int n) {
+    protected Behavior<CommandSensorMain> createMsg(final ActorContext<CommandSensorMain> context) {
         return Behaviors.receive(CommandSensorMain.class)
-                .onMessage(CreateSensor.class, child -> createChildActor(context, n))
-                .onMessage(RemoveSensor.class, child -> removeChildActor(context, n))
+                .onMessage(CreateSensor.class, createSensor -> createChildActor(context, createSensor))
+                .onMessage(RemoveSensor.class, removeSensor -> removeChildActor(context, removeSensor))
                 .build();
     }
 

@@ -8,12 +8,12 @@ import example.com.akkaimpl.commonimpl.LifeCycle;
 public abstract class MessageActorSensorParent implements LifeCycle {
     protected MessageActorSensorParent(){}
     protected interface CommandSensorParent extends LifeCycleActor{}
-    public static record CreateSensor() implements CommandSensorParent {}
+    public static record CreateSensor(int numberSensor) implements CommandSensorParent {}
     public static record RemoveSensor() implements CommandSensorParent {}
-    protected Behavior<CommandSensorParent> createMsg(final ActorContext<CommandSensorParent> context, final int n) {
+    protected Behavior<CommandSensorParent> createMsg(final ActorContext<CommandSensorParent> context) {
         return Behaviors.receive(CommandSensorParent.class)
-                .onMessage(CreateSensor.class, child -> createChildActor(context, n))
-                .onMessage(RemoveSensor.class, child -> removeChildActor(context, n))
+                .onMessage(CreateSensor.class, createSensor -> createChildActor(context, createSensor))
+                .onMessage(RemoveSensor.class, removeSensor -> removeChildActor(context, removeSensor))
                 .build();
     }
 

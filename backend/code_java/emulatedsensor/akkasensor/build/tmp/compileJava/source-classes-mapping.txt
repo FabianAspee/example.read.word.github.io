@@ -6,10 +6,17 @@ example/com/akkaimpl/actorguardian/ActorGuardianMain.java
  example.com.akkaimpl.actorguardian.ActorGuardianMain
 example/com/rabbitmq/SenderRabbit.java
  example.com.rabbitmq.SenderRabbit
+example/com/akkaimpl/actordashboard/childdashboard/ActorDashboardChild.java
+ example.com.akkaimpl.actordashboard.childdashboard.ActorDashboardChild
 example/com/activemq/ConfigActiveMQ.java
  example.com.activemq.ConfigActiveMQ
 example/com/akkaimpl/actorpatch/parentpatch/ActorPatchParent.java
  example.com.akkaimpl.actorpatch.parentpatch.ActorPatchParent
+example/com/akkaimpl/actorlistener/MessageActorListener.java
+ example.com.akkaimpl.actorlistener.MessageActorListener
+ example.com.akkaimpl.actorlistener.MessageActorListener$Event
+ example.com.akkaimpl.actorlistener.MessageActorListener$MemberChange
+ example.com.akkaimpl.actorlistener.MessageActorListener$ReachabilityChange
 example/com/akkaimpl/actorguardian/MessageActorGuardianMain.java
  example.com.akkaimpl.actorguardian.MessageActorGuardianMain
  example.com.akkaimpl.actorguardian.MessageActorGuardianMain$CommandGuardianMain
@@ -24,12 +31,13 @@ example/com/akkaimpl/actorpatch/childpatch/MessageActorPatchChild.java
  example.com.akkaimpl.actorpatch.childpatch.MessageActorPatchChild
  example.com.akkaimpl.actorpatch.childpatch.MessageActorPatchChild$CommandPatch
  example.com.akkaimpl.actorpatch.childpatch.MessageActorPatchChild$InitPatch
+ example.com.akkaimpl.actorpatch.childpatch.MessageActorPatchChild$PositionSensor
  example.com.akkaimpl.actorpatch.childpatch.MessageActorPatchChild$ReceiveInfoSensor
 example/com/akkaimpl/configproperties/ApplicationProperties.java
  example.com.akkaimpl.configproperties.ApplicationProperties
  example.com.akkaimpl.configproperties.ApplicationProperties$ApplicationPropertiesBuilder
-example/GeneralMain.java
- example.GeneralMain
+example/com/vertx/SenderVertx.java
+ example.com.vertx.SenderVertx
 example/com/kafka/ConfigKafka.java
  example.com.kafka.ConfigKafka
 example/com/akkaimpl/actorpatch/parentpatch/MessageActorPatchParent.java
@@ -37,17 +45,36 @@ example/com/akkaimpl/actorpatch/parentpatch/MessageActorPatchParent.java
  example.com.akkaimpl.actorpatch.parentpatch.MessageActorPatchParent$CommandPatchParent
  example.com.akkaimpl.actorpatch.parentpatch.MessageActorPatchParent$CreateSensor
  example.com.akkaimpl.actorpatch.parentpatch.MessageActorPatchParent$RemoveSensor
-example/com/akkaimpl/actorsensor/childsensor/ActorSensorImpl.java
- example.com.akkaimpl.actorsensor.childsensor.ActorSensorImpl
 example/com/akkaimpl/actorpatch/childpatch/ActorPatchChild.java
  example.com.akkaimpl.actorpatch.childpatch.ActorPatchChild
+example/com/akkaimpl/commonimpl/LoggerImpl.java
+ example.com.akkaimpl.commonimpl.LoggerImpl
+example/com/akkaimpl/actordashboard/ActorDashboardMain.java
+ example.com.akkaimpl.actordashboard.ActorDashboardMain
 example/com/akkaimpl/actorsensor/parentsensor/MessageActorSensorParent.java
  example.com.akkaimpl.actorsensor.parentsensor.MessageActorSensorParent
  example.com.akkaimpl.actorsensor.parentsensor.MessageActorSensorParent$CommandSensorParent
  example.com.akkaimpl.actorsensor.parentsensor.MessageActorSensorParent$CreateSensor
  example.com.akkaimpl.actorsensor.parentsensor.MessageActorSensorParent$RemoveSensor
+example/com/akkaimpl/actormanager/MessageActorManager.java
+ example.com.akkaimpl.actormanager.MessageActorManager
+ example.com.akkaimpl.actormanager.MessageActorManager$ManagerCommand
+ example.com.akkaimpl.actormanager.MessageActorManager$RegisterDashBoard
+ example.com.akkaimpl.actormanager.MessageActorManager$RegisterGuardian
+ example.com.akkaimpl.actormanager.MessageActorManager$RegisterPatch
+ example.com.akkaimpl.actormanager.MessageActorManager$RegisterSensor
+example/com/akkaimpl/actordashboard/childdashboard/MessageActorDashboardChild.java
+ example.com.akkaimpl.actordashboard.childdashboard.MessageActorDashboardChild
+example/com/akkaimpl/actordashboard/parentdashboard/ActorDashboardParent.java
+ example.com.akkaimpl.actordashboard.parentdashboard.ActorDashboardParent
+example/com/akkaimpl/actordashboard/parentdashboard/MessageActorDashboardParent.java
+ example.com.akkaimpl.actordashboard.parentdashboard.MessageActorDashboardParent
+example/com/akkaimpl/actordashboard/MessageActorDashboardMain.java
+ example.com.akkaimpl.actordashboard.MessageActorDashboardMain
 example/com/akkaimpl/actorpatch/ActorPatchMain.java
  example.com.akkaimpl.actorpatch.ActorPatchMain
+example/com/akkaimpl/actorlistener/ActorListenerCluster.java
+ example.com.akkaimpl.actorlistener.ActorListenerCluster
 example/com/akkaimpl/actorsensor/MessageActorSensorMain.java
  example.com.akkaimpl.actorsensor.MessageActorSensorMain
  example.com.akkaimpl.actorsensor.MessageActorSensorMain$CommandSensorMain
@@ -68,6 +95,8 @@ example/com/kafka/SenderKafka.java
  example.com.kafka.SenderKafka
 example/com/akkaimpl/actorsensor/ActorSensorMain.java
  example.com.akkaimpl.actorsensor.ActorSensorMain
+example/com/akkaimpl/actormanager/ActorManager.java
+ example.com.akkaimpl.actormanager.ActorManager
 example/com/akkaimpl/actorpatch/MessageActorPatchMain.java
  example.com.akkaimpl.actorpatch.MessageActorPatchMain
  example.com.akkaimpl.actorpatch.MessageActorPatchMain$CommandPatchMain
@@ -88,9 +117,12 @@ example/com/akkaimpl/actorsensor/childsensor/MessageActorSensor.java
  example.com.akkaimpl.actorsensor.childsensor.MessageActorSensor$CommandSensor
  example.com.akkaimpl.actorsensor.childsensor.MessageActorSensor$InitSensor
  example.com.akkaimpl.actorsensor.childsensor.MessageActorSensor$MoveSensor
+ example.com.akkaimpl.actorsensor.childsensor.MessageActorSensor$PatchIsReady
+example/com/akkaimpl/actorsensor/childsensor/ActorSensorChild.java
+ example.com.akkaimpl.actorsensor.childsensor.ActorSensorChild
 example/com/akkaimpl/exceptiongestion/ExceptionGestion.java
  example.com.akkaimpl.exceptiongestion.ExceptionGestion
 example/com/akkaimpl/actorsensor/parentsensor/ActorSensorParent.java
  example.com.akkaimpl.actorsensor.parentsensor.ActorSensorParent
-example/com/vertx/SenderVertx.java
- example.com.vertx.SenderVertx
+example/GeneralMain.java
+ example.GeneralMain

@@ -3,10 +3,6 @@ package example.com.akkaimpl.actorguardian.childguardian;
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
-import example.com.akkaimpl.actorsensor.childsensor.ActorSensorImpl;
-import example.com.akkaimpl.actorsensor.childsensor.MessageActorSensor;
-
-import java.time.Duration;
 
 public class ActorGuardianChild extends MessageActorGuardianChild {
     private ActorGuardianChild() {
@@ -19,6 +15,7 @@ public class ActorGuardianChild extends MessageActorGuardianChild {
 
     @Override
     protected Behavior<CommandGuardian> startGuardian(ActorContext<CommandGuardian> context) {
-        return null;
+        info("init guardian"+context.getSelf().path().name());
+        return Behaviors.same();
     }
 }
