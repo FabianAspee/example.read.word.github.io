@@ -26,5 +26,32 @@
             "path_spring_rabbitmq":"api/emulated_sensor",
             "path_grpc":"api/emulated_sensor_stream"
         }
+    },
+    "read_database_async":{
+        "url_read_database":"http://localhost:8080/",
+        "controller_artist": "example/artist/",
+        "controller_playlist": "example/playlist/",
+        "path_artist":{
+            "read_artist_by_name":"read/artistbyname",
+            "read_all_artists":"read/allartists"
+        },
+        "path_playlist":{
+            "read_playlist_by_name":"read/playlistbyname",
+            "read_all_playlist":"read/allplaylist"
+        }
+    },
+    "read_database_vertx":{
+        "url_read_database":"http://localhost:8080/",
+        "controller_artist": "example/artistvertx/",
+        "controller_playlist": "example/playlistvertx/",
+        "path_artist":{
+            "read_artist_by_name":"read/artisbynamevertx",
+            "read_all_artists":"read/allartistsvertx"
+        },
+        "path_playlist":{
+            "read_playlist_by_name":"read/playlistbynamevertx",
+            "read_all_playlist":"read/allplaylistvertx"
+        }
     }
+
 }

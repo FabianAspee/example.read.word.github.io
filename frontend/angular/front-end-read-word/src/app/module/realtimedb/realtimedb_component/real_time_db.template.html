@@ -1,0 +1,16 @@
+
+<div class="form-group"> 
+    <div class="form-group"> 
+      <custom-button [name]="real_time_read_artists_database_vertx" (click_event)="readArtistsVertx()"></custom-button>
+      <custom-button [name]="real_time_read_playlist_database_vertx" (click_event)="readPlayListVertx()"></custom-button> 
+      <custom-button [name]="real_time_read_artists_database_kafka" (click_event)="readArtistsKafka()"></custom-button>
+      <custom-button [name]="real_time_read_playlist_database_kafka" (click_event)="readPlayListKafka()"></custom-button>
+      <custom-button [name]="real_time_read_artists_database_rabbitmq" (click_event)="readArtistsRabbitMQ()"></custom-button>
+      <custom-button [name]="real_time_read_playlist_database_rabbitmq" (click_event)="readPlayListRabbitMQ()"></custom-button>
+    </div>  
+  <div class="container">
+    <div class="text-center">
+      <custom-text-area [name]="place_holder_result"></custom-text-area>
+    </div> 
+  </div>
+</div>
