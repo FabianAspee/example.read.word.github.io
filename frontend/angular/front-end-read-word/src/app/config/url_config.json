@@ -52,6 +52,19 @@
             "read_playlist_by_name":"read/playlistbynamevertx",
             "read_all_playlist":"read/allplaylistvertx"
         }
+    },
+    "mathematical_operation":{
+        "url_mathematical_operation":"http://localhost:8080/",
+        "controller_mathematical": "mathematical/operationvertx/", 
+        "path_mathematical_operation":{
+            "calculus_factorial":"mathematical/factorial",
+            "calculus_fibonacci":"mathematical/fibonacci"
+        }
+    },
+    "vertx":{ 
+        "event_bus_url":"http://localhost:8888/",
+        "endpoint_event_bus":"eventbus/",
+        "address_handler":"some_address"
     }
 
 }

@@ -15,13 +15,14 @@ export class RealTimeDatabaseService{
     }
 
     async readAllPlayListVertx():Promise<string>{
-        return this.http.get<string>(data.read_database_vertx.controller_playlist+
-            data.read_database_vertx.path_playlist.read_all_playlist).pipe(catchError(this.handleError<string>('readAllPlayListVertx', ''))).toPromise(); 
+        return this.http.post<string>(data.read_database_vertx.url_read_database + data.read_database_vertx.controller_playlist+
+            data.read_database_vertx.path_playlist.read_all_playlist,undefined,this.getHttpOptionsWithoutParam()).
+            pipe(catchError(this.handleError<string>('readAllPlayListVertx', ''))).toPromise(); 
     
     }
 
     async readAllArtistVertx():Promise<string>{
-        return this.http.post<string>(data.read_database_vertx.controller_artist+
+        return this.http.post<string>(data.read_database_vertx.url_read_database + data.read_database_vertx.controller_artist+
             data.read_database_vertx.path_artist.read_all_artists, undefined,this.getHttpOptionsWithoutParam())
             .pipe(catchError(this.handleError<string>('readAllNameVertx', ''))).toPromise();
     } 

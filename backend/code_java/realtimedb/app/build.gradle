@@ -34,6 +34,9 @@ dependencies {
     implementation 'com.google.guava:guava:31.0.1-jre'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter:2.5.5'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
     implementation platform("io.vertx:vertx-stack-depchain:${getVersion.vertxVersion}")
     implementation 'io.vertx:vertx-core'
 

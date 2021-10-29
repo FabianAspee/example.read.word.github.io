@@ -16,8 +16,8 @@ import { MessageService } from './config/message.service';
 import { RealTimeDatabaseModule } from './module/realtimedb/real_time_db.module';
 import { SharedModule } from './module/shared_module';
 import { ReadDatabaseAsyncModule } from './module/read_database_async/read_database_async.module';
-
- 
+import { MathematicalOperationModule } from './module/mathematical_operations/mathematical_operation.module'; 
+  
 
 @NgModule({
   declarations: [ 
@@ -28,11 +28,12 @@ import { ReadDatabaseAsyncModule } from './module/read_database_async/read_datab
   imports: [
     BrowserModule,
     BrowserAnimationsModule, 
-    SharedModule,
+    SharedModule, 
     WordCountModule,
     EmulatedSensorModule, 
     RealTimeDatabaseModule,
     ReadDatabaseAsyncModule,
+    MathematicalOperationModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,

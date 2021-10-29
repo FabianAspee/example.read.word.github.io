@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from "@angular/core"; 
-import { Receiver } from "src/app/module/stompjs/Receiver.module";
 import { ReceiverVertx } from "../../vertx_config/receiver_module_vertx";
 import { RealTimeDatabaseService } from "../real_time_db.service";
 
@@ -14,7 +13,7 @@ import { RealTimeDatabaseService } from "../real_time_db.service";
   
     constructor(private configService: RealTimeDatabaseService,
       private receiver: ReceiverVertx) {
-        receiver.onopen(this.printValueRabbit)
+        receiver.onopen_database(this.printValueVertx)
     } 
     ngOnDestroy(): void {
       this.receiver.onclose();
@@ -27,11 +26,13 @@ import { RealTimeDatabaseService } from "../real_time_db.service";
     real_time_read_playlist_database_rabbitmq = "Read PlayList With RabbitMQ"
 
     place_holder_result = "Read Database result";
-    
+    private cleanPlaceHolder=():string=>""
     public async readArtistsVertx(){
+      this.place_holder_result = this.cleanPlaceHolder();
        await this.configService.readAllArtistVertx().then(x=>console.log("make call ok"));
     }
     public async readPlayListVertx(){
+      this.place_holder_result = this.cleanPlaceHolder();
       await this.configService.readAllPlayListVertx().then(x=>console.log("make call ok"));
    }
     public readArtistsKafka=():void=>{}
@@ -39,9 +40,8 @@ import { RealTimeDatabaseService } from "../real_time_db.service";
     public readArtistsRabbitMQ=():void=>{}
     public readPlayListRabbitMQ=():void=>{}
 
-    private printValueRabbit=(x:string):string=>{
-        console.log(x)
-        return x;
-      }
+    private printValueVertx=(x:string):void=>{ 
+      this.place_holder_result+=x+"\n";
+    }
 
   }

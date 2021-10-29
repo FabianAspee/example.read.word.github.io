@@ -3,46 +3,53 @@ package com.example.app.vertx.configvertx;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.bridge.BridgeEventType;
 import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSBridgeOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Optional;
+
 @CrossOrigin(origins = {"http://127.0.0.1:8888/eventbus/info?*"})
 public class ConfigurationVertx extends AbstractVerticle implements ComponentVertx{
+    private static final ConfigurationVertx intance = new ConfigurationVertx();
     private final int port;
-    public ConfigurationVertx(int port){
-        this.port = port;
+    private Router router;
+    private ConfigurationVertx(){
+        this.port = 8888;
+        this.vertx = Vertx.vertx();
     }
-
+    public static ComponentVertx newBuilder(){
+        return intance;
+    }
+    @Override
+    public ComponentVertx build() {
+        return this;
+    }
 
     @Override
     public void start(Promise<Void> startPromise) {
-        vertx = Vertx.vertx();
-        vertx.createHttpServer().requestHandler(req -> req.response()
-                .putHeader("content-type", "text/plain")
-                .end("Hello from Vert.x!")).listen(port,"127.0.0.1", http -> {
-            if (http.succeeded()) {
-                startPromise.complete();
-                System.out.println("HTTP server started on localhost port 8888");
-            } else {
-                startPromise.fail(http.cause());
-                System.out.println("ABBIAMO FALITO");
-            }
-        });
+        vertx.createHttpServer().requestHandler(Optional.ofNullable(router)
+                        .isPresent()?getRouter(): this::getHandlerHttp)
+                .listen(port,"127.0.0.1", http -> {
+                    if (http.succeeded()) {
+                        startPromise.complete();
+                        System.out.println("HTTP server started on localhost port 8888");
+                    } else {
+                        startPromise.fail(http.cause());
+                        System.out.println("ABBIAMO FALITO");
+                    }
+                });
     }
     @Override
-    public void enableBridge(){
-        Router router = Router.router(vertx);
+    public ComponentVertx enableBridge(){
+        this.router = Router.router(vertx);
         SockJSHandler sockJSHandler = SockJSHandler.create(vertx);
-
         SockJSBridgeOptions options = new SockJSBridgeOptions()
-                .addInboundPermitted(new PermittedOptions().setAddress("some-address"))
                 .addOutboundPermitted(new PermittedOptions().setAddress("some-address"));
-
         Router subRouter = sockJSHandler.bridge(options, event -> {
 
             // You can also optionally provide a handler like this which will be passed any events that occur on the bridge
@@ -59,15 +66,24 @@ public class ConfigurationVertx extends AbstractVerticle implements ComponentVer
         });
         // mount the bridge on the router
         router.mountSubRouter("/eventbus", subRouter);
-
+        return this;
     }
     @Override
     public <T> void publicToEventBus(T msg){
         vertx.eventBus().publish("some-address",msg);
+        System.out.println(msg);
     }
     @Override
     public void stopVertx(){
        vertx.close();
     }
+    private void getHandlerHttp(HttpServerRequest res){
+        res.response()
+                .putHeader("content-type", "text/plain")
+                .end("Hello from Vert.x!");
+    }
 
+    private Router getRouter(){
+        return this.router;
+    }
 }

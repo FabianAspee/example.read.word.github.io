@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">
+            org.sqlite.JDBC
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:sqlite:./chinook.db
+        </property>
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+        <!-- SQL dialect -->
+        <property name="dialect">
+            com.enigmabridge.hibernate.dialect.SQLiteDialect
+        </property>
+
+        <!-- Show and print nice SQL on stdout -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <!-- Create Database -->
+        <mapping class="com.example.app.database.table.Artists"/>
+        <mapping class="com.example.app.database.table.PlayLists"/>
+    </session-factory>
+</hibernate-configuration>

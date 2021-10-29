@@ -18,4 +18,5 @@ public interface CrudOperation {
     CompletableFuture<Optional<List<String>>> readByName(final String  name);
     CompletableFuture<Optional<List<String>>> readAll();
     CompletableFuture<Optional<Integer>> updateByName(final String name);
+
 }
