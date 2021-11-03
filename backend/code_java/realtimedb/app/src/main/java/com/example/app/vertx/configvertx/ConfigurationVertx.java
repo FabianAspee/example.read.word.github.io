@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://127.0.0.1:8888/eventbus/info?*"})
 public class ConfigurationVertx extends AbstractVerticle implements ComponentVertx{
     private static final ConfigurationVertx intance = new ConfigurationVertx();
     private final int port;

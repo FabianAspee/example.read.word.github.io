@@ -7,11 +7,16 @@ package com.example.app.memoryoperation;
  **/
 
 import com.example.app.functionalinterface.FunctionMathematicalWithTimer;
+import com.example.app.logger.LoggerImpl;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.commons.math3.util.Pair;
 
-public class ExceptionManager {
-    public static int execFunction(FunctionMathematicalWithTimer<Pair<Integer,Integer>,Integer> function,int first, int second){
+public class ExceptionManager<T> extends LoggerImpl<T> {
+    protected ExceptionManager(Class<T> classToLogger) {
+        super(classToLogger);
+    }
+
+    public static int execFunction(FunctionMathematicalWithTimer<Pair<Integer,Integer>,Integer> function, int first, int second){
         try {
             return function.apply(Pair.create(first,second));
         } catch (InterruptedException e) {
